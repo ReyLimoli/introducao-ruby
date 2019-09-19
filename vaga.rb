@@ -1,26 +1,37 @@
-class Vaga
-    attr_reader :descricao
-    attr_writer :descricao
-    attr_accessor :titulo, :candidatos
+require_relative 'empresa'
 
-    #construtor
-    def initialize(titulo, descricao)
-        @titulo = titulo
-        @descricao = descricao
-        @ativa = false
-        @candidatos = []
-    end
+class Vaga < Empresa
+  attr_reader :descricao
+  attr_writer :descricao
+  attr_accessor :titulo, :candidatos, :empresa
 
-    def ativar!
-        self.ativa = true 
-    end
+  #construtor
+  def initialize(titulo, descricao, empresa)
+    @titulo = titulo
+    @descricao = descricao
+    @ativa = false
+    @candidatos = []
+    @empresa = empresa
+  end
 
-    def ativa?
-        ativa()
-    end
+  def ativar!
+    self.ativa = true 
+  end
 
-    private
+  def ativa?
+    ativa()
+  end
 
-    attr_accessor :ativa
-    
+  def include?(t)
+    titulo.downcase.include?(t) || descricao.downcase.include?(t)
+  end
+
+  def to_s
+    puts "\n#{titulo}\n\n#{descricao}\n\n#{empresa}"
+  end
+
+  private
+
+  attr_accessor :ativa
+  
 end
